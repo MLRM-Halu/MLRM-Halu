@@ -10,3 +10,9 @@
 
 ## News
 - \[**May 2025**\]  [Paper](https://arxiv.org/abs/2505.21523) is now available. 📢
+
+
+## TO DO 
+- [✅] Release visualization tools and reasoning length control  strategies.
+- [✅] Release small-scale RH-Bench benchmark.
+- [ ]  Expand and refine RH-Bench to support more multimodal reasoning model.
