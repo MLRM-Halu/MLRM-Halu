@@ -52,9 +52,15 @@ Test-time compute has empowered multimodal large language models to generate ext
 ### Model
 | Model                          | Link                              |
 |--------------------------------|-------------------------------------------|
-|R1-Onevision-7B          | 🤗 https://huggingface.co/Fancy-MLLM/R1-Onevision-7B-RL  |
-| SafeKey-8B          | 🤗 [kzhou35/SafeKey-8B](https://huggingface.co/kzhou35/SafeKey-8B)     |
-| SafeKey-14B         | 🤗 [kzhou35/SafeKey-14B](https://huggingface.co/kzhou35/SafeKey-14B)   |
+|R1-Onevision          | 🤗 [R1-Onevision](https://huggingface.co/Fancy-MLLM/R1-Onevision-7B-RL)|
+|ThinkLite-VL          | 🤗 [ThinkLite-VL ](https://huggingface.co/russwang/ThinkLite-VL-7B)     |
+|MM-Eureka-Qwen        | 🤗 [MM-Eureka-Qwen ](https://huggingface.co/FanqingM/MM-Eureka-Qwen-7B)   |
+|Vision-R1        | 🤗 [Vision-R1](https://huggingface.co/JefferyZhan/Qwen2.5-VL-7B-Instruct-Vision-R1)   |
+|Ocean-R1        | 🤗 [Ocean-R1 ](https://huggingface.co/minglingfeng/Ocean_R1_7B_Instruct)   |
+|MM-R1       | 🤗 [MM-R1 ](https://huggingface.co/MMR1/MMR1-Math-v0-7B)   |
+|Curr-ReFT       | 🤗 [MM-R1 ](https://huggingface.co/ZTE-AIM/3B-Curr-ReFT)   |
+|LLM- R1      | 🤗 [LLM-R1 ](https://huggingface.co/VLM-Reasoner/LMM-R1-MGT-PerceReason)   |
+|Skywork-R1V      | 🤗 [Skywork-R1V](https://huggingface.co/Skywork/Skywork-R1V-38B)   |
 
 
 ```
