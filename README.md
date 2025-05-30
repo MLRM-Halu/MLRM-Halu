@@ -46,5 +46,26 @@ Test-time compute has empowered multimodal large language models to generate ext
 ```
 
 
+## 🧐 Evaluation 
+
+
+```
+
+```
+
+
+### Citation
+If you find the code is valuable, please use this citation.
+```
+ @misc{liu2025thinkingseeingassessingamplified,
+      title={More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models}, 
+      author={Chengzhi Liu and Zhongxing Xu and Qingyue Wei and Juncheng Wu and James Zou and Xin Eric Wang and Yuyin Zhou and Sheng Liu},
+      year={2025},
+      eprint={2505.21523},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2505.21523}, 
+```
+
 
 
