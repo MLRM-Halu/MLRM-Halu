@@ -49,6 +49,13 @@ Test-time compute has empowered multimodal large language models to generate ext
 
 ## 🧐 Evaluation 
 
+### Model
+| Model                          | Link                              |
+|--------------------------------|-------------------------------------------|
+|R1-Onevision-7B          | 🤗 https://huggingface.co/Fancy-MLLM/R1-Onevision-7B-RL  |
+| SafeKey-8B          | 🤗 [kzhou35/SafeKey-8B](https://huggingface.co/kzhou35/SafeKey-8B)     |
+| SafeKey-14B         | 🤗 [kzhou35/SafeKey-14B](https://huggingface.co/kzhou35/SafeKey-14B)   |
+
 
 ```
 
