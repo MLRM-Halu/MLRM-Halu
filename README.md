@@ -31,7 +31,7 @@ Test-time compute has empowered multimodal large language models to generate ext
 >> conda activate myenv
 >> pip install -r requirements.txt
 ```
-
+![Teaser figure](figures/heatmap.png)
 
 ## 🕹️ Reasoning Length Contorl
 
