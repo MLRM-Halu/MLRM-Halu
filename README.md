@@ -29,15 +29,6 @@ Test-time compute has empowered multimodal large language models to generate ext
 
 
 
-## Setup
-
-```
-conda create -n mlrm python=3.10
-conda activate mlrm
-bash setup.sh
-
-```
-
 
 ## 🎯 Visualization 
 
