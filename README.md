@@ -33,9 +33,9 @@ Test-time compute has empowered multimodal large language models to generate ext
 ## 🎯 Visualization 
 
 ```
->> conda create -n myenv python=3.9
->> conda activate myenv
->> pip install -r requirements.txt
+python heatmap.py \
+--image_path /data/image.jpg  \
+--question "Describe this image in detail."
 ```
 ![Teaser figure](figures/heatmap.png)
 
