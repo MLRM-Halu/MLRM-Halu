@@ -37,6 +37,16 @@ python heatmap.py \
 --image_path /data/image.jpg  \
 --question "Describe this image in detail."
 ```
+
+```
+python layer_analysis.py \
+  --model-path "../R1-OneVision/" \
+  --image-folder "../image/" \
+  --question-file ".../question.jsonl" \
+  --answers-file "../results.pt" \
+  --plot-path "../attention_distribution.png"
+```
+  
 ![Teaser figure](figures/heatmap.png)
 
 ## 🕹️ Reasoning Length Contorl
