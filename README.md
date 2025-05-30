@@ -44,6 +44,7 @@ Test-time compute has empowered multimodal large language models to generate ext
 ```
 
 ```
+![Teaser figure](figures/length.png)
 
 
 ## 🧐 Evaluation 
