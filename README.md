@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="figures/logo1.png" alt="Project Logo" width="120"/>
+  <img src="figures/logo1.png" alt="Project Logo" width="180"/>
 </p>
 
 # More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models
