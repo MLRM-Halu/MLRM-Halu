@@ -1,8 +1,10 @@
-<p align="center">
-  <img src="figures/logo1.png" alt="Project Logo" width="250"/>
-</p>
+<div style="display: flex; align-items: center;">
 
-# More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models
+  <img src="figures/logo1.png" alt="Project Logo" width="80" style="margin-right: 20px;"/>
+
+  <h1 style="margin: 0;">More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models</h1>
+
+</div>
 
 
 <a href='https://arxiv.org/abs/2505.21523'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a> <a href='https://mlrm-halu.github.io/ '><img src='https://img.shields.io/badge/Project-Page-green'></a> <a href='https://huggingface.co/datasets/kzhou35/mssbench/tree/main'><img src='https://img.shields.io/badge/🤗-Dataset-blue'></a>
