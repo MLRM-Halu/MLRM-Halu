@@ -35,11 +35,11 @@ Test-time compute has empowered multimodal large language models to generate ext
 
 ## 🕹️ Reasoning Length Contorl
 
-*Step 1** 1111
+**Step 1** 1111
 ```
 
 ```
-*Step 2**    1111
+**Step 2**    1111
 
 ```
 
