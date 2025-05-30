@@ -5,4 +5,4 @@
 </a>
 
 
-![Teaser figure](figures/fig1.png)
+![Teaser figure](figures/intro.png)
