@@ -8,5 +8,5 @@
 ![Teaser figure](figures/intro.png)
 
 
-## 🆕 News
+## News
 - \[**May 2025**\]  [Paper](https://arxiv.org/abs/2505.21523) is now available. 📢
