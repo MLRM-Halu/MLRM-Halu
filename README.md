@@ -117,6 +117,10 @@ python evaluation_rhbench_perception.py \
 --input_dir "/data/steering_hallu/" \
 --output_dir "/data/steering_hallu/score" \
 --summary_file "/data/steering_hallu/evaluation_summary.txt"
+
+#  Adjust according to your file format or method.
+python RH-AUC.py --txt_file_reason '/path/to/your/evaluation_summary_reason.txt' --txt_file_hallu '/path/to/your/evaluation_summary_hallucination.txt'
+
 ```
 
 
