@@ -9,7 +9,7 @@ import torch
 from tqdm import tqdm
 from transformers import AutoProcessor, AutoModelForConditionalGeneration
 
-# Configure logging
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -23,6 +23,7 @@ torch.cuda.manual_seed_all(20)
 
 
 def setup_device(device_id: str = "cuda:0") -> torch.device:
+    """Set up the computation device."""
     if not torch.cuda.is_available() and "cuda" in device_id:
         logger.warning("CUDA not available, falling back to CPU")
         return torch.device("cpu")
@@ -30,6 +31,7 @@ def setup_device(device_id: str = "cuda:0") -> torch.device:
 
 
 def adjust_residual_hook(direction: torch.Tensor, layer_idx: int, weight: float):
+    """Hook function to adjust residual connections for attention-based steering."""
     def hook_fn(module, input, output):
         direction_layer = direction[layer_idx].to(output[0].device)
         return (output[0] + weight * direction_layer,) + output[1:]
@@ -38,7 +40,7 @@ def adjust_residual_hook(direction: torch.Tensor, layer_idx: int, weight: float)
 
 def load_model(model_id: str, direction_path: Optional[str] = None, direction_weight: float = 0.0) -> Tuple[Any, Any]:
 
-    logger.info(f"Loading model: {model_id}")
+    logger.info(f"Loading model: {model_id} with direction_weight={direction_weight}")
     try:
         processor = AutoProcessor.from_pretrained(model_id, trust_remote_code=True)
         model = AutoModelForConditionalGeneration.from_pretrained(
@@ -77,16 +79,14 @@ def extract_thinking(response: str, processor: Any) -> Tuple[str, int]:
 
 
 def generate_response(model: Any, processor: Any, image_path: str, question: str) -> str:
-
+    
     messages = [
         {
             "role": "user",
             "content": [
                 {"type": "image", "image": image_path},
                 {"type": "text", "text": (
-                    "You FIRST think about the reasoning process as an internal monologue and then provide the final answer. "
-                    "The reasoning process MUST BE enclosed within <think> </think> tags. "
-                    "The final answer MUST BE in <answer> </answer> tags.\n" + question
+                    "You FIRST think about the reasoning process as an internal monologue and then provide the final answer. The reasoning process MUST BE enclosed within <think> </think> tags. The final answer MUST BE in <answer> </answer> tags.\n" + question
                 )},
             ],
         }
@@ -130,6 +130,7 @@ def load_dataset(file_path: str) -> List[Dict[str, Any]]:
 
 
 def save_results(data: List[Dict[str, Any]], file_path: str, mode: str = "w", add_timestamp: bool = False) -> None:
+
     if add_timestamp:
         import time
         timestamp = time.strftime("%Y%m%d-%H%M%S")
@@ -155,7 +156,18 @@ def process_benchmark(
     num_samples: Optional[int] = None,
     checkpoint_interval: int = 10
 ) -> None:
+    """
+    Process a benchmark dataset with checkpointing.
 
+    Args:
+        model (Any): Loaded model.
+        processor (Any): Loaded processor.
+        dataset_path (str): Path to the input dataset.
+        output_path (str): Path to save results.
+        image_root (str): Root directory for images.
+        num_samples (Optional[int]): Number of samples to process.
+        checkpoint_interval (int): Save results every N samples.
+    """
     dataset = load_dataset(dataset_path)
     if num_samples:
         dataset = dataset[:num_samples]
@@ -234,35 +246,47 @@ def process_benchmark(
 
 
 def main():
-    """Main function to run the benchmark processing."""
-    parser = argparse.ArgumentParser(description="Process vision-language model benchmarks with attention-based steering.")
+    """Main function to run the benchmark processing for multiple direction weights."""
+    parser = argparse.ArgumentParser(description="Process vision-language model benchmarks with attention-based steering for multiple direction weights.")
     parser.add_argument("--dataset", type=str, required=True, help="Path to input JSON/JSONL dataset")
-    parser.add_argument("--output", type=str, required=True, help="Path to save output JSONL results")
+    parser.add_argument("--output", type=str, required=True, help="Base path for output JSONL results (weight will be appended)")
     parser.add_argument("--model_id", type=str, required=True, help="Model identifier or path")
     parser.add_argument("--image_root", type=str, default="", help="Root directory for images")
     parser.add_argument("--num_samples", type=int, default=None, help="Number of samples to process")
     parser.add_argument("--direction_path", type=str, default=None, help="Path to steering direction tensor")
-    parser.add_argument("--direction_weight", type=float, default=0.0, help="Weight for attention steering")
+    parser.add_argument("--direction_weights", type=float, nargs="+", default=[-0.1, 0.1], help="List of direction weights to process")
     parser.add_argument("--device", type=str, default="cuda:0", help="Device for computation (e.g., cuda:0, cpu)")
 
     args = parser.parse_args()
     global device
     device = setup_device(args.device)
 
-    model, processor = load_model(
-        args.model_id,
-        direction_path=args.direction_path,
-        direction_weight=args.direction_weight
-    )
+    for weight in args.direction_weights:
+        logger.info(f"Starting benchmark for direction_weight={weight}")
+        # Generate unique output path for each weight
+        base, ext = os.path.splitext(args.output)
+        output_path = f"{base}_weight_{weight:.2f}{ext}"
 
-    process_benchmark(
-        model=model,
-        processor=processor,
-        dataset_path=args.dataset,
-        output_path=args.output,
-        image_root=args.image_root,
-        num_samples=args.num_samples
-    )
+        gc.collect()
+        torch.cuda.empty_cache()
+
+        model, processor = load_model(
+            args.model_id,
+            direction_path=args.direction_path,
+            direction_weight=weight
+        )
+
+
+        process_benchmark(
+            model=model,
+            processor=processor,
+            dataset_path=args.dataset,
+            output_path=output_path,
+            image_root=args.image_root,
+            num_samples=args.num_samples
+        )
+
+        logger.info(f"Completed benchmark for direction_weight={weight}, results saved to {output_path}")
 
 
 if __name__ == "__main__":
