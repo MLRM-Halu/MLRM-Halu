@@ -51,8 +51,14 @@ python layer_analysis.py \
 
 ## 🕹️ Reasoning Length Contorl
 
-**Step 1** 1111
+**Step 1**  Collect responses from multimodal reasoning models on various tasks to extract hidden states of internal attention later.
 ```
+python generate_response_your_data.py \
+  --input "/your/dataset/path/annotation.jsonl" \
+  --output "/your/output/path/results.jsonl" \
+  --model_id "/your/model/path/ModelDirectory/" \
+  --num_samples 100 \
+  --device "cuda:2"
 
 ```
 **Step 2**    1111
