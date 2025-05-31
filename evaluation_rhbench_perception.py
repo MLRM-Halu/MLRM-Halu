@@ -357,13 +357,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Batch process JSON files for answer evaluation with hallucination scoring")
     parser.add_argument("--input_dir", type=str,
-                        default="/data/steering_reason/",
+                        default="/data/steering_hallu/",
                         help="Input directory containing JSON files")
     parser.add_argument("--output_dir", type=str,
-                        default="/data/steering_reason/score",
+                        default="/data/steering_hallu/score",
                         help="Output directory for evaluation results")
     parser.add_argument("--summary_file", type=str,
-                        default="/data/steering_reason/evaluation_summary.txt",
+                        default="/data/steering_hallu/evaluation_summary.txt",
                         help="TXT file for summary statistics")
     args = parser.parse_args()
 
