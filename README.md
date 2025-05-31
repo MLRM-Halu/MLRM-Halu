@@ -106,7 +106,17 @@ python steering_mlrm.py \
 |Skywork-R1V      | 🤗 [Skywork-R1V](https://huggingface.co/Skywork/Skywork-R1V-38B)   |
 
 ```
+# Reason
+python evaluation_rhbench_reason.py \
+--input_dir "/data/steering_reason/" \
+--output_dir "/data/steering_reason/score" \
+--summary_file "/data/steering_reason/evaluation_summary.txt"
 
+# Hallucination
+python evaluation_rhbench_perception.py \
+--input_dir "/data/steering_hallu/" \
+--output_dir "/data/steering_hallu/score" \
+--summary_file "/data/steering_hallu/evaluation_summary.txt"
 ```
 
 
