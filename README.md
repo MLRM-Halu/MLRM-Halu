@@ -64,7 +64,6 @@ python generate_response_your_data.py \
   --model_id "/your/model/path/ModelDirectory/" \
   --num_samples 100 \
   --device "cuda:2"
-
 ```
 **Step 2**    Extract per-layer directional vectors from the residual inputs of the self-attention mechanism in multimodal reasoning models.  It supports two modes: text mode, which processes only the question and thinking tokens, and vision mode, which processes the image along with the question and thinking tokens.
 ```
@@ -86,7 +85,6 @@ python steering_mlrm.py \
   --direction_weights_range -0.1 0.1 0.01 \ #  (start, end, and step )
   --num_samples 100 \
   --device cuda:0
-
 ```
 
 ![Teaser figure](figures/length.png)
@@ -106,7 +104,6 @@ python steering_mlrm.py \
 |Curr-ReFT       | 🤗 [MM-R1 ](https://huggingface.co/ZTE-AIM/3B-Curr-ReFT)   |
 |LLM- R1      | 🤗 [LLM-R1 ](https://huggingface.co/VLM-Reasoner/LMM-R1-MGT-PerceReason)   |
 |Skywork-R1V      | 🤗 [Skywork-R1V](https://huggingface.co/Skywork/Skywork-R1V-38B)   |
-
 
 ```
 
