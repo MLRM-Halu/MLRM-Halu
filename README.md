@@ -61,11 +61,15 @@ python generate_response_your_data.py \
   --device "cuda:2"
 
 ```
-**Step 2**    1111
-
+**Step 2**   Extract per-layer directional vectors from the residual inputs of the self-attention mechanism in multimodal reasoning models.  It supports two modes: text mode, which processes only the question and thinking tokens, and vision mode, which processes the image along with the question and thinking tokens.
+```
+python get_direction.py \
+  --model /path/to/your/model/ \
+  --json_path /path/to/your/response.jsonl \
+  --output_path /path/to/save/steering_direction.pt \
+  --mode text
 ```
 
-```
 ![Teaser figure](figures/length.png)
 
 
