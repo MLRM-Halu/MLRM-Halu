@@ -245,6 +245,7 @@ def process_benchmark(
             start_idx = len(results)
 
 
+# Support multi-parameter traversal within the range -- Suitable for large-scale verification
 def main():
     """Main function to run the benchmark processing for multiple direction weights."""
     parser = argparse.ArgumentParser(description="Process vision-language model benchmarks with attention-based steering for multiple direction weights.")
@@ -254,14 +255,30 @@ def main():
     parser.add_argument("--image_root", type=str, default="", help="Root directory for images")
     parser.add_argument("--num_samples", type=int, default=None, help="Number of samples to process")
     parser.add_argument("--direction_path", type=str, default=None, help="Path to steering direction tensor")
-    parser.add_argument("--direction_weights", type=float, nargs="+", default=[-0.1, 0.1], help="List of direction weights to process")
+    parser.add_argument("--direction_weights", type=float, nargs="+", default=None,
+                        help="List of direction weights to process (e.g., -0.1 0.0 0.1)")
+    parser.add_argument("--direction_weights_range", type=float, nargs=3, metavar=('START', 'END', 'STEP'),
+                        help="Instead of a list, specify a range: start end step (e.g., -0.1 0.1 0.01)")
     parser.add_argument("--device", type=str, default="cuda:0", help="Device for computation (e.g., cuda:0, cpu)")
 
     args = parser.parse_args()
     global device
     device = setup_device(args.device)
 
-    for weight in args.direction_weights:
+    # Generate direction weights either from range or list
+    if args.direction_weights_range:
+        start, end, step = args.direction_weights_range
+        direction_weights = [round(w, 4) for w in np.arange(start, end + step, step)]
+        logger.info(f"Generated direction_weights from range: {direction_weights}")
+    elif args.direction_weights is not None:
+        direction_weights = args.direction_weights
+        logger.info(f"Using explicitly provided direction_weights: {direction_weights}")
+    else:
+        direction_weights = [0.0]
+        logger.info(f"No direction weights specified, defaulting to: {direction_weights}")
+
+    # Run benchmark per direction weight
+    for weight in direction_weights:
         logger.info(f"Starting benchmark for direction_weight={weight}")
         # Generate unique output path for each weight
         base, ext = os.path.splitext(args.output)
@@ -276,7 +293,6 @@ def main():
             direction_weight=weight
         )
 
-
         process_benchmark(
             model=model,
             processor=processor,
@@ -287,7 +303,52 @@ def main():
         )
 
         logger.info(f"Completed benchmark for direction_weight={weight}, results saved to {output_path}")
+        
+# Specified parameter control -- Applicable to small-scale operations
+# 
+# def main():
+#     """Main function to run the benchmark processing for multiple direction weights."""
+#     parser = argparse.ArgumentParser(description="Process vision-language model benchmarks with attention-based steering for multiple direction weights.")
+#     parser.add_argument("--dataset", type=str, required=True, help="Path to input JSON/JSONL dataset")
+#     parser.add_argument("--output", type=str, required=True, help="Base path for output JSONL results (weight will be appended)")
+#     parser.add_argument("--model_id", type=str, required=True, help="Model identifier or path")
+#     parser.add_argument("--image_root", type=str, default="", help="Root directory for images")
+#     parser.add_argument("--num_samples", type=int, default=None, help="Number of samples to process")
+#     parser.add_argument("--direction_path", type=str, default=None, help="Path to steering direction tensor")
+#     parser.add_argument("--direction_weights", type=float, nargs="+", default=[-0.1, 0.1], help="List of direction weights to process")
+#     parser.add_argument("--device", type=str, default="cuda:0", help="Device for computation (e.g., cuda:0, cpu)")
+
+#     args = parser.parse_args()
+#     global device
+#     device = setup_device(args.device)
+
+#     for weight in args.direction_weights:
+#         logger.info(f"Starting benchmark for direction_weight={weight}")
+#         # Generate unique output path for each weight
+#         base, ext = os.path.splitext(args.output)
+#         output_path = f"{base}_weight_{weight:.2f}{ext}"
+
+#         gc.collect()
+#         torch.cuda.empty_cache()
+
+#         model, processor = load_model(
+#             args.model_id,
+#             direction_path=args.direction_path,
+#             direction_weight=weight
+#         )
 
 
-if __name__ == "__main__":
-    main()
+#         process_benchmark(
+#             model=model,
+#             processor=processor,
+#             dataset_path=args.dataset,
+#             output_path=output_path,
+#             image_root=args.image_root,
+#             num_samples=args.num_samples
+#         )
+
+#         logger.info(f"Completed benchmark for direction_weight={weight}, results saved to {output_path}")
+
+
+# if __name__ == "__main__":
+#     main()
