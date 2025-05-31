@@ -51,7 +51,7 @@ python layer_analysis.py \
 
 ## 🕹️ Reasoning Length Contorl
 
-**Step 1**  Collect responses from multimodal reasoning models on various tasks to extract hidden states of internal attention later.
+**Step 1**   Collect responses from multimodal reasoning models on various tasks to extract hidden states of internal attention later.
 ```
 python generate_response_your_data.py \
   --input "/your/dataset/path/annotation.jsonl" \
@@ -61,13 +61,27 @@ python generate_response_your_data.py \
   --device "cuda:2"
 
 ```
-**Step 2**   Extract per-layer directional vectors from the residual inputs of the self-attention mechanism in multimodal reasoning models.  It supports two modes: text mode, which processes only the question and thinking tokens, and vision mode, which processes the image along with the question and thinking tokens.
+**Step 2**    Extract per-layer directional vectors from the residual inputs of the self-attention mechanism in multimodal reasoning models.  It supports two modes: text mode, which processes only the question and thinking tokens, and vision mode, which processes the image along with the question and thinking tokens.
 ```
 python get_direction.py \
   --model /path/to/your/model/ \
   --json_path /path/to/your/response.jsonl \
   --output_path /path/to/save/steering_direction.pt \
   --mode text
+```
+
+**Step 3**    Control the reasoning length of the multimodal model and obtain responses under each steering state. The current range is [-0.1,0.1], which can be adjusted according to different datasets and tasks. Note: Extremely large or small parameter values may degrade the model's performance. Support both automated sweeping of parameters via range input and manual specification of individual values.
+```
+python steering_mlrm.py \
+  --dataset /path/to/dataset.jsonl \
+  --output results/output.jsonl \
+  --model_id /path/to/model \
+  --image_root /path/to/images \
+  --direction_path /path/to/direction_vector.pt \
+  --direction_weights_range -0.1 0.1 0.01 \ #  (start, end, and step )
+  --num_samples 100 \
+  --device cuda:0
+
 ```
 
 ![Teaser figure](figures/length.png)
