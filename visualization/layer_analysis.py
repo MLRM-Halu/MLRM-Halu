@@ -50,13 +50,27 @@ def run_attention_analysis(
         image_file = line["image"]
         qs = line["text"]
 
-        messages_query = [{
+        # Base Model 
+        # messages_query = [{
+        #     "role": "user",
+        #     "content": [
+        #         {"type": "image", "image": os.path.join(image_folder, image_file)},
+        #         {"type": "text", "text": qs},
+        #     ],
+        # }]
+
+        # Reasoning Model 
+         messages_query = [{
             "role": "user",
             "content": [
                 {"type": "image", "image": os.path.join(image_folder, image_file)},
-                {"type": "text", "text": qs},
+                {"type": "text", "text": f"{qs} You FIRST think about the reasoning process as an internal monologue and then provide the final answer. The reasoning process MUST BE enclosed within <think> </think> tags. The final answer MUST BE in <answer> </answer> tags."},
             ],
         }]
+   
+
+
+        
 
         image_inputs, _ = process_vision_info(messages_query)
         text_query = processor.apply_chat_template(messages_query, tokenize=False, add_generation_prompt=False)
