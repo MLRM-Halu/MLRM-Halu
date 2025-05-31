@@ -126,7 +126,7 @@ python RH-AUC.py --txt_file_reason '/path/to/your/evaluation_summary_reason.txt'
 ```
 
 
-### Citation
+### 🙏 Citation
 If you find the code is valuable, please use this citation.
 ```
  @misc{liu2025thinkingseeingassessingamplified,
