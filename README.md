@@ -51,6 +51,11 @@ python layer_analysis.py \
 
 ## 🕹️ Reasoning Length Contorl
 
+### Budget Forcing & Test Time Scaling
+ Refer to budget_forcing.py and Scaling_more.py in the length_control directory.
+
+### Latent State Steering
+
 **Step 1**   Collect responses from multimodal reasoning models on various tasks to extract hidden states of internal attention later.
 ```
 python generate_response_your_data.py \
