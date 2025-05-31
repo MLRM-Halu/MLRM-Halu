@@ -6,7 +6,7 @@
 # More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models
 
 
-<a href='https://arxiv.org/abs/2505.21523'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a> <a href='https://mlrm-halu.github.io/ '><img src='https://img.shields.io/badge/Project-Page-green'></a> <a href='https://huggingface.co/datasets/kzhou35/mssbench/tree/main'><img src='https://img.shields.io/badge/🤗-Dataset-blue'></a>
+<a href='https://arxiv.org/abs/2505.21523'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a> <a href='https://mlrm-halu.github.io/ '><img src='https://img.shields.io/badge/Project-Page-green'></a> <a href='https://huggingface.co/datasets/LCZZZZ/RH-Bench/tree/main'><img src='https://img.shields.io/badge/🤗-Dataset-blue'></a>
 </a>
 
 
