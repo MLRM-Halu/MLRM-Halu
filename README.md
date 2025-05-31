@@ -105,6 +105,8 @@ python steering_mlrm.py \
 |LLM- R1      | 🤗 [LLM-R1 ](https://huggingface.co/VLM-Reasoner/LMM-R1-MGT-PerceReason)   |
 |Skywork-R1V      | 🤗 [Skywork-R1V](https://huggingface.co/Skywork/Skywork-R1V-38B)   |
 
+Control the reasoning length using the provided method or other approaches on RH-Bench or other datasets. Evaluate the responses and visualize the RH-AUC scores. Future updates will include more efficient methods for balancing reasoning and hallucination evaluation❗
+
 ```
 # Reason
 python evaluation_rhbench_reason.py \
